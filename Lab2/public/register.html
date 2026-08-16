@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module Registration — CST College SMS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="index.html" class="brand">
+      <img src="img/logo.svg" alt="CST College crest" width="40" height="40">
+      <span class="brand__wordmark">
+        <span class="brand__name">CST College</span>
+        <span class="brand__tag">Student Management System</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="register.html">Registration</a>
+      <a href="payment.html">Tuition Payment</a>
+      <a href="results.html">Results</a>
+    </nav>
+    <div class="header-actions" id="header-actions">
+      <a href="login.html" class="btn btn--ghost-light">Log In</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <form class="form-shell" id="register-form" novalidate>
+    <h1>Module registration</h1>
+    <p class="sub">Registration only proceeds once tuition, drug testing, and the registration window are all clear.</p>
+
+    <div class="alert alert--error" id="form-alert"></div>
+    <div class="alert alert--success" id="form-success"></div>
+
+    <div class="field">
+      <label for="studentId">Student ID</label>
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8">
+    </div>
+
+    <div class="field">
+      <label for="moduleCode">Module</label>
+      <select id="moduleCode" name="moduleCode">
+        <option value="SWE302">SWE302 — Software Testing &amp; Quality Assurance</option>
+        <option value="CSC201">CSC201 — Data Structures &amp; Algorithms</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn--gold btn--block btn--lg">Register Module</button>
+
+    <p class="form-foot">Not paid yet? <a href="payment.html">Upload your tuition payment first</a>.</p>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 CST College. Student Management System.</span>
+    <span>Built for SWE302 — Software Testing &amp; Quality Assurance.</span>
+  </div>
+</footer>
+
+<script src="js/header.js"></script>
+<script src="js/register.js"></script>
+</body>
+</html>

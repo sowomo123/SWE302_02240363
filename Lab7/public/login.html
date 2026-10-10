@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — CST College SMS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="index.html" class="brand">
+      <img src="img/logo.png" alt="CST logo" width="40" height="40">
+      <span class="brand__wordmark">
+        <span class="brand__name">College of Science and Technology</span>
+        <span class="brand__tag">Student Management System</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="modules.html">Module Catalog</a>
+      <a href="register.html">Registration</a>
+      <a href="payment.html">Tuition Payment</a>
+      <a href="results.html">Results</a>
+    </nav>
+    <div class="header-actions">
+      <a href="login.html" class="btn btn--ghost-light">Log In</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <form class="form-shell" id="login-form" novalidate>
+    <h1>Log in</h1>
+    <p class="sub">Use the Student ID and password issued at enrolment.</p>
+
+    <div class="alert alert--error" id="form-alert"></div>
+
+    <div class="field">
+      <label for="studentId">Student ID</label>
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8" autocomplete="username" required>
+      <p class="hint">Exactly 8 digits, numbers only (R2).</p>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+      <p class="hint">8–12 characters, with at least one uppercase, one lowercase, and one number (R4).</p>
+    </div>
+
+    <button type="submit" class="btn btn--gold btn--block btn--lg">Log In</button>
+
+    <p class="form-foot">Demo account: <strong>02230124</strong> / <strong>Passw0rd1</strong></p>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 CST College. Student Management System.</span>
+    <span>Built for SWE302 — Software Testing &amp; Quality Assurance.</span>
+  </div>
+</footer>
+
+<script src="js/login.js"></script>
+</body>
+</html>

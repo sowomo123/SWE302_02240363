@@ -13,10 +13,12 @@ document.getElementById('lookup-form').addEventListener('submit', async (e) => {
   const table = document.getElementById('results-table');
   const body = document.getElementById('results-body');
   const pdfLink = document.getElementById('pdf-link');
+  const studentInfo = document.getElementById('student-info');
 
   alertBox.classList.remove('is-visible');
   table.style.display = 'none';
   pdfLink.style.display = 'none';
+  studentInfo.style.display = 'none';
   body.innerHTML = '';
 
   const studentId = document.getElementById('studentId').value.trim();
@@ -31,9 +33,38 @@ document.getElementById('lookup-form').addEventListener('submit', async (e) => {
       return;
     }
 
+    // Display student information
+    if (data.student) {
+      studentInfo.innerHTML = `
+        <div class="student-info-header">
+          <div class="student-info-header__field">Student:</div>
+          <div class="student-info-header__value">${data.student.name} (${data.student.studentId})</div>
+          <div class="student-info-header__field">Semester:</div>
+          <div class="student-info-header__value">${data.student.semester}</div>
+          <div class="student-info-header__field">Academic Year:</div>
+          <div class="student-info-header__value">${data.student.academicYear}</div>
+        </div>
+      `;
+      studentInfo.style.display = 'block';
+    }
+
+    // Display results with enhanced information
     data.results.forEach((r) => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${r.moduleCode}</td><td>${r.moduleTitle}</td><td class="grade">${r.grade}</td>`;
+      const marks = r.marks !== null ? r.marks : 'Pending';
+      const grade = r.grade !== null ? r.grade : 'Pending';
+      const gradePoints = r.gradePoints !== null ? r.gradePoints : '-';
+      const statusClass = r.status === 'Result Pending' ? 'status-pending' : 'status-passed';
+      
+      tr.innerHTML = `
+        <td>${r.moduleCode}</td>
+        <td>${r.moduleTitle}</td>
+        <td>${r.credits}</td>
+        <td>${marks}</td>
+        <td class="grade">${grade}</td>
+        <td>${gradePoints}</td>
+        <td><span class="result-status ${statusClass}">${r.status}</span></td>
+      `;
       body.appendChild(tr);
     });
 

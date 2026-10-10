@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results — CST College SMS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="index.html" class="brand">
+      <img src="img/logo.svg" alt="CST College crest" width="40" height="40">
+      <span class="brand__wordmark">
+        <span class="brand__name">CST College</span>
+        <span class="brand__tag">Student Management System</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="modules.html">Module Catalog</a>
+      <a href="register.html">Registration</a>
+      <a href="payment.html">Tuition Payment</a>
+      <a href="results.html" class="active">Results</a>
+    </nav>
+    <div class="header-actions" id="header-actions">
+      <a href="login.html" class="btn btn--ghost-light">Log In</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <form class="form-shell" id="lookup-form" novalidate>
+    <h1>Semester results</h1>
+    <p class="sub">Only students registered for at least one module can view results.</p>
+
+    <div class="alert alert--error" id="form-alert"></div>
+
+    <div class="field">
+      <label for="studentId">Student ID</label>
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8">
+    </div>
+
+    <button type="submit" class="btn btn--gold btn--block btn--lg">View Results</button>
+
+    <div id="student-info" style="display:none; margin-bottom: 24px;"></div>
+
+    <table class="results-table" id="results-table" style="display:none;">
+      <thead>
+        <tr><th>Module Code</th><th>Module Title</th><th>Credits</th><th>Marks</th><th>Grade</th><th>Grade Points</th><th>Status</th></tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+    </table>
+
+    <a id="pdf-link" href="#" class="btn btn--outline btn--block" style="display:none; margin-top:16px;">Download as PDF</a>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 CST College. Student Management System.</span>
+    <span>Built for SWE302 — Software Testing &amp; Quality Assurance.</span>
+  </div>
+</footer>
+
+<script src="js/header.js"></script>
+<script src="js/results.js"></script>
+</body>
+</html>

@@ -111,6 +111,52 @@ function createApp(store) {
   // ---------------------------------------------------------------------
   // Section 2: Student Registration
   // ---------------------------------------------------------------------
+  
+  // GET /api/modules - Get all available modules
+  app.get('/api/modules', (req, res) => {
+    const modulesArray = Array.from(store.modules.values()).map((module) => ({
+      code: module.code,
+      title: module.title,
+      description: module.description,
+      credits: module.credits,
+      semester: module.semester,
+      academicYear: module.academicYear,
+      lecturer: module.lecturer,
+      availableProgrammes: module.availableProgrammes,
+    }));
+    return res.status(200).json({ success: true, modules: modulesArray });
+  });
+
+  // GET /api/students/:studentId - Get student details
+  app.get('/api/students/:studentId', (req, res) => {
+    const { studentId } = req.params;
+    const student = store.students.get(studentId);
+    if (!student) {
+      return res.status(404).json({ success: false, message: 'Student not found.' });
+    }
+    
+    // Return student details with registered module information
+    const registeredModulesDetails = student.registeredModules.map((code) => {
+      const module = store.modules.get(code);
+      return module ? { code: module.code, title: module.title, credits: module.credits } : { code };
+    });
+
+    return res.status(200).json({
+      success: true,
+      student: {
+        studentId: student.studentId,
+        name: student.name,
+        programme: student.programme,
+        semester: student.semester,
+        academicYear: student.academicYear,
+        tuitionPaid: student.tuitionPaid,
+        drugTestVerified: student.drugTestVerified,
+        registeredModules: student.registeredModules,
+        registeredModulesDetails,
+      },
+    });
+  });
+
   app.post('/api/register', (req, res) => {
     const { studentId, moduleCode } = req.body || {};
 
@@ -119,9 +165,25 @@ function createApp(store) {
       return res.status(404).json({ success: false, message: 'Student not found.' });
     }
 
-    const moduleExists = store.modules.has(moduleCode);
-    if (!moduleExists) {
+    const module = store.modules.get(moduleCode);
+    if (!module) {
       return res.status(400).json({ success: false, message: `Unknown module code: ${moduleCode}` });
+    }
+
+    // Check if module is available for student's programme
+    if (!module.availableProgrammes.includes(student.programme)) {
+      return res.status(403).json({
+        success: false,
+        message: `Module ${moduleCode} is not available for your programme (${student.programme}).`,
+      });
+    }
+
+    // Check if module matches student's semester
+    if (module.semester !== student.semester) {
+      return res.status(403).json({
+        success: false,
+        message: `Module ${moduleCode} is for semester ${module.semester}. You are currently in semester ${student.semester}.`,
+      });
     }
 
     const decision = decideRegistration(
@@ -164,8 +226,49 @@ function createApp(store) {
         message: 'Only registered students may view their semester results.',
       });
     }
-    const results = store.results.get(studentId) || [];
-    return res.status(200).json({ success: true, results });
+    
+    // Get results for this student
+    const studentResults = store.results.get(studentId) || [];
+    
+    // Build results for all registered modules (including those without published results)
+    const allModuleResults = student.registeredModules.map((moduleCode) => {
+      const module = store.modules.get(moduleCode);
+      const publishedResult = studentResults.find((r) => r.moduleCode === moduleCode);
+      
+      if (publishedResult) {
+        return {
+          moduleCode: publishedResult.moduleCode,
+          moduleTitle: publishedResult.moduleTitle,
+          credits: publishedResult.credits || (module ? module.credits : null),
+          marks: publishedResult.marks,
+          grade: publishedResult.grade,
+          gradePoints: publishedResult.gradePoints,
+          status: publishedResult.status,
+        };
+      } else {
+        // Module is registered but no result published yet
+        return {
+          moduleCode: moduleCode,
+          moduleTitle: module ? module.title : moduleCode,
+          credits: module ? module.credits : null,
+          marks: null,
+          grade: null,
+          gradePoints: null,
+          status: 'Result Pending',
+        };
+      }
+    });
+
+    return res.status(200).json({ 
+      success: true, 
+      student: {
+        studentId: student.studentId,
+        name: student.name,
+        semester: student.semester,
+        academicYear: student.academicYear,
+      },
+      results: allModuleResults 
+    });
   });
 
   app.get('/api/results/:studentId/pdf', (req, res) => {
@@ -180,9 +283,50 @@ function createApp(store) {
         message: 'Only registered students may view their semester results.',
       });
     }
-    const results = store.results.get(studentId) || [];
-    const body = `CST College - Semester Result\nStudent: ${student.name} (${studentId})\n\n` +
-      results.map((r) => `${r.moduleCode}  ${r.moduleTitle}  Grade: ${r.grade}`).join('\n');
+    
+    // Get results for this student
+    const studentResults = store.results.get(studentId) || [];
+    
+    // Build results for all registered modules
+    const allModuleResults = student.registeredModules.map((moduleCode) => {
+      const module = store.modules.get(moduleCode);
+      const publishedResult = studentResults.find((r) => r.moduleCode === moduleCode);
+      
+      if (publishedResult) {
+        return {
+          moduleCode: publishedResult.moduleCode,
+          moduleTitle: publishedResult.moduleTitle,
+          credits: publishedResult.credits || (module ? module.credits : null),
+          marks: publishedResult.marks,
+          grade: publishedResult.grade,
+          gradePoints: publishedResult.gradePoints,
+          status: publishedResult.status,
+        };
+      } else {
+        return {
+          moduleCode: moduleCode,
+          moduleTitle: module ? module.title : moduleCode,
+          credits: module ? module.credits : null,
+          marks: null,
+          grade: null,
+          gradePoints: null,
+          status: 'Result Pending',
+        };
+      }
+    });
+
+    const body = `CST College - Semester Result
+Student: ${student.name} (${studentId})
+Programme: ${student.programme}
+Semester: ${student.semester}
+Academic Year: ${student.academicYear}
+
+${allModuleResults.map((r) => {
+  const marks = r.marks !== null ? `Marks: ${r.marks}` : 'Marks: Pending';
+  const grade = r.grade !== null ? `Grade: ${r.grade}` : 'Grade: Pending';
+  return `${r.moduleCode}  ${r.moduleTitle}  Credits: ${r.credits}  ${marks}  ${grade}  Status: ${r.status}`;
+}).join('\n')}`;
+    
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="${studentId}-results.pdf"`);
     // Minimal placeholder "PDF" payload for demo purposes.

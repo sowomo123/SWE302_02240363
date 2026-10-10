@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module Catalog — CST College SMS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="index.html" class="brand">
+      <img src="img/logo.svg" alt="CST College crest" width="40" height="40">
+      <span class="brand__wordmark">
+        <span class="brand__name">CST College</span>
+        <span class="brand__tag">Student Management System</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="modules.html" class="active">Module Catalog</a>
+      <a href="register.html">Quick Register</a>
+      <a href="payment.html">Tuition Payment</a>
+      <a href="results.html">Results</a>
+    </nav>
+    <div class="header-actions" id="header-actions">
+      <a href="login.html" class="btn btn--ghost-light">Log In</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container section--tight">
+    <div class="section__head">
+      <h1>Module Catalog</h1>
+      <p>Browse available modules for your semester and register for your courses.</p>
+    </div>
+
+    <!-- Student Info Card -->
+    <div class="student-info-card" id="student-info" style="display: none;">
+      <div class="student-info-card__header">
+        <span class="student-info-card__label">Student Information</span>
+      </div>
+      <div class="student-info-card__body">
+        <div class="student-info-card__row">
+          <span class="student-info-card__field">Student ID</span>
+          <span class="student-info-card__value" id="info-studentId">-</span>
+        </div>
+        <div class="student-info-card__row">
+          <span class="student-info-card__field">Name</span>
+          <span class="student-info-card__value" id="info-name">-</span>
+        </div>
+        <div class="student-info-card__row">
+          <span class="student-info-card__field">Programme</span>
+          <span class="student-info-card__value" id="info-programme">-</span>
+        </div>
+        <div class="student-info-card__row">
+          <span class="student-info-card__field">Semester</span>
+          <span class="student-info-card__value" id="info-semester">-</span>
+        </div>
+        <div class="student-info-card__row">
+          <span class="student-info-card__field">Academic Year</span>
+          <span class="student-info-card__value" id="info-academicYear">-</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div class="alert alert--error" id="alert-error"></div>
+    <div class="alert alert--success" id="alert-success"></div>
+
+    <!-- Registered Modules Section -->
+    <div class="registered-section" id="registered-section" style="display: none;">
+      <h2>Your Registered Modules</h2>
+      <div class="registered-modules-grid" id="registered-modules-grid"></div>
+    </div>
+
+    <!-- Module Catalog Grid -->
+    <h2 style="margin-top: 48px;">Available Modules</h2>
+    <div class="modules-grid" id="modules-grid">
+      <p class="loading">Loading modules...</p>
+    </div>
+  </div>
+</main>
+
+<!-- Registration Confirmation Modal -->
+<div class="modal-overlay" id="confirm-modal" style="display: none;">
+  <div class="modal">
+    <div class="modal__header">
+      <h3>Confirm Registration</h3>
+      <button class="modal__close" id="modal-close">&times;</button>
+    </div>
+    <div class="modal__body">
+      <p>Are you sure you want to register for:</p>
+      <div class="module-confirm-card">
+        <strong id="confirm-module-code"></strong>
+        <div id="confirm-module-title"></div>
+      </div>
+      <div class="modal__actions">
+        <button class="btn btn--outline" id="modal-cancel">Cancel</button>
+        <button class="btn btn--gold" id="modal-confirm">Confirm Registration</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 CST College. Student Management System.</span>
+    <span>Built for SWE302 — Software Testing &amp; Quality Assurance.</span>
+  </div>
+</footer>
+
+<script src="js/header.js"></script>
+<script src="js/modules.js"></script>
+</body>
+</html>

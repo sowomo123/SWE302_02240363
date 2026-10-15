@@ -1,6 +1,5 @@
 package com.example.student;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,17 +8,20 @@ import java.util.Optional;
 @Service
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Student addStudent(Student student) {
-        if (student.getStudentId() == null || student.getStudentId().isEmpty()) {
+        if (student.getStudentId() == null || student.getStudentId().isBlank()) {
             throw new IllegalArgumentException("Student ID cannot be null or empty");
         }
-        if (student.getName() == null || student.getName().isEmpty()) {
+        if (student.getName() == null || student.getName().isBlank()) {
             throw new IllegalArgumentException("Student name cannot be null or empty");
         }
-        if (student.getEmail() == null || student.getEmail().isEmpty()) {
+        if (student.getEmail() == null || student.getEmail().isBlank()) {
             throw new IllegalArgumentException("Student email cannot be null or empty");
         }
         if (studentRepository.existsByStudentId(student.getStudentId())) {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StudentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">student-management</a> &gt; <a href="index.source.html" class="el_package">com.example.student</a> &gt; <span class="el_source">StudentController.java</span></div><h1>StudentController.java</h1><pre class="source lang-java linenums">package com.example.student;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/api/students&quot;)
+<span class="fc" id="L11">public class StudentController {</span>
+
+    @Autowired
+    private StudentService studentService;
+
+    @PostMapping
+    public ResponseEntity&lt;Student&gt; addStudent(@RequestBody Student student) {
+<span class="fc" id="L18">        Student savedStudent = studentService.addStudent(student);</span>
+<span class="fc" id="L19">        return ResponseEntity.ok(savedStudent);</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Student&gt; getStudentById(@PathVariable Long id) {
+<span class="fc" id="L24">        return studentService.getStudentById(id)</span>
+<span class="fc" id="L25">                .map(ResponseEntity::ok)</span>
+<span class="fc" id="L26">                .orElse(ResponseEntity.notFound().build());</span>
+    }
+
+    @GetMapping(&quot;/student-id/{studentId}&quot;)
+    public ResponseEntity&lt;Student&gt; getStudentByStudentId(@PathVariable String studentId) {
+<span class="fc" id="L31">        return studentService.getStudentByStudentId(studentId)</span>
+<span class="fc" id="L32">                .map(ResponseEntity::ok)</span>
+<span class="fc" id="L33">                .orElse(ResponseEntity.notFound().build());</span>
+    }
+
+    @GetMapping
+    public ResponseEntity&lt;List&lt;Student&gt;&gt; getAllStudents() {
+<span class="fc" id="L38">        List&lt;Student&gt; students = studentService.getAllStudents();</span>
+<span class="fc" id="L39">        return ResponseEntity.ok(students);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Student&gt; updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
+        try {
+<span class="fc" id="L45">            Student updatedStudent = studentService.updateStudent(id, studentDetails);</span>
+<span class="fc" id="L46">            return ResponseEntity.ok(updatedStudent);</span>
+<span class="nc" id="L47">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L48">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteStudent(@PathVariable Long id) {
+        try {
+<span class="fc" id="L55">            studentService.deleteStudent(id);</span>
+<span class="fc" id="L56">            return ResponseEntity.noContent().build();</span>
+<span class="nc" id="L57">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L58">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+
+    @DeleteMapping(&quot;/student-id/{studentId}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteStudentByStudentId(@PathVariable String studentId) {
+        try {
+<span class="nc" id="L65">            studentService.deleteStudentByStudentId(studentId);</span>
+<span class="nc" id="L66">            return ResponseEntity.noContent().build();</span>
+<span class="nc" id="L67">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L68">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

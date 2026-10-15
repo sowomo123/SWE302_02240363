@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+student-management,com.example.student,StudentController,19,56,0,0,8,15,1,7,1,7
+student-management,com.example.student,StudentService,75,95,9,13,16,18,11,11,5,6
+student-management,com.example.student,Student,12,53,0,0,1,23,1,12,1,12
+student-management,com.example.student,StudentManagementApplication,5,3,0,0,2,1,1,1,1,1

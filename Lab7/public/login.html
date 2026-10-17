@@ -34,21 +34,21 @@
     <h1>Log in</h1>
     <p class="sub">Use the Student ID and password issued at enrolment.</p>
 
-    <div class="alert alert--error" id="form-alert"></div>
+    <div class="alert alert--error" id="form-alert" data-cy="error"></div>
 
     <div class="field">
       <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8" autocomplete="username" required>
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8" autocomplete="username" required data-cy="student-id">
       <p class="hint">Exactly 8 digits, numbers only (R2).</p>
     </div>
 
     <div class="field">
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+      <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required data-cy="password">
       <p class="hint">8–12 characters, with at least one uppercase, one lowercase, and one number (R4).</p>
     </div>
 
-    <button type="submit" class="btn btn--gold btn--block btn--lg">Log In</button>
+    <button type="submit" class="btn btn--gold btn--block btn--lg" data-cy="login-btn">Log In</button>
 
     <p class="form-foot">Demo account: <strong>02230124</strong> / <strong>Passw0rd1</strong></p>
   </form>

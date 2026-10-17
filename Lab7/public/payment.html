@@ -34,27 +34,27 @@
     <h1>Tuition payment</h1>
     <p class="sub">Pay via Mobile Banking to the official CST College account, then upload your proof below.</p>
 
-    <div class="alert alert--error" id="form-alert"></div>
-    <div class="alert alert--success" id="form-success"></div>
+    <div class="alert alert--error" id="form-alert" data-cy="error"></div>
+    <div class="alert alert--success" id="form-success" data-cy="success"></div>
 
     <div class="field">
       <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8">
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8" data-cy="student-id">
     </div>
 
     <div class="field">
       <label for="screenshot">Payment screenshot</label>
-      <input type="file" id="screenshot" name="screenshot" accept=".jpg,.jpeg,.png">
+      <input type="file" id="screenshot" name="screenshot" accept=".jpg,.jpeg,.png" data-cy="screenshot">
       <p class="hint">JPG, JPEG, or PNG only (R6).</p>
     </div>
 
     <div class="field">
       <label for="transactionNumber">Transaction number</label>
-      <input type="text" id="transactionNumber" name="transactionNumber" placeholder="123-123456789" maxlength="13">
+      <input type="text" id="transactionNumber" name="transactionNumber" placeholder="123-123456789" maxlength="13" data-cy="transaction-number">
       <p class="hint">Format: 3 digits, hyphen, 9 digits — e.g. 123-123456789 (R7).</p>
     </div>
 
-    <button type="submit" class="btn btn--gold btn--block btn--lg">Submit Payment</button>
+    <button type="submit" class="btn btn--gold btn--block btn--lg" data-cy="submit-btn">Submit Payment</button>
   </form>
 </main>
 

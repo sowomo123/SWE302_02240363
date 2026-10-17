@@ -37,7 +37,7 @@
     </div>
 
     <!-- Student Info Card -->
-    <div class="student-info-card" id="student-info" style="display: none;">
+    <div class="student-info-card" id="student-info" style="display: none;" data-cy="student-info-card">
       <div class="student-info-card__header">
         <span class="student-info-card__label">Student Information</span>
       </div>
@@ -66,25 +66,25 @@
     </div>
 
     <!-- Alert Messages -->
-    <div class="alert alert--error" id="alert-error"></div>
-    <div class="alert alert--success" id="alert-success"></div>
+    <div class="alert alert--error" id="alert-error" data-cy="error"></div>
+    <div class="alert alert--success" id="alert-success" data-cy="success"></div>
 
     <!-- Registered Modules Section -->
-    <div class="registered-section" id="registered-section" style="display: none;">
+    <div class="registered-section" id="registered-section" style="display: none;" data-cy="registered-section">
       <h2>Your Registered Modules</h2>
-      <div class="registered-modules-grid" id="registered-modules-grid"></div>
+      <div class="registered-modules-grid" id="registered-modules-grid" data-cy="registered-modules-grid"></div>
     </div>
 
     <!-- Module Catalog Grid -->
     <h2 style="margin-top: 48px;">Available Modules</h2>
-    <div class="modules-grid" id="modules-grid">
+    <div class="modules-grid" id="modules-grid" data-cy="modules-grid">
       <p class="loading">Loading modules...</p>
     </div>
   </div>
 </main>
 
 <!-- Registration Confirmation Modal -->
-<div class="modal-overlay" id="confirm-modal" style="display: none;">
+<div class="modal-overlay" id="confirm-modal" style="display: none;" data-cy="confirm-modal">
   <div class="modal">
     <div class="modal__header">
       <h3>Confirm Registration</h3>
@@ -97,8 +97,8 @@
         <div id="confirm-module-title"></div>
       </div>
       <div class="modal__actions">
-        <button class="btn btn--outline" id="modal-cancel">Cancel</button>
-        <button class="btn btn--gold" id="modal-confirm">Confirm Registration</button>
+        <button class="btn btn--outline" id="modal-cancel" data-cy="modal-cancel">Cancel</button>
+        <button class="btn btn--gold" id="modal-confirm" data-cy="modal-confirm">Confirm Registration</button>
       </div>
     </div>
   </div>

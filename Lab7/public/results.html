@@ -34,25 +34,25 @@
     <h1>Semester results</h1>
     <p class="sub">Only students registered for at least one module can view results.</p>
 
-    <div class="alert alert--error" id="form-alert"></div>
+    <div class="alert alert--error" id="form-alert" data-cy="error"></div>
 
     <div class="field">
       <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8">
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8" data-cy="student-id">
     </div>
 
-    <button type="submit" class="btn btn--gold btn--block btn--lg">View Results</button>
+    <button type="submit" class="btn btn--gold btn--block btn--lg" data-cy="view-results-btn">View Results</button>
 
     <div id="student-info" style="display:none; margin-bottom: 24px;"></div>
 
-    <table class="results-table" id="results-table" style="display:none;">
+    <table class="results-table" id="results-table" style="display:none;" data-cy="results-table">
       <thead>
         <tr><th>Module Code</th><th>Module Title</th><th>Credits</th><th>Marks</th><th>Grade</th><th>Grade Points</th><th>Status</th></tr>
       </thead>
       <tbody id="results-body"></tbody>
     </table>
 
-    <a id="pdf-link" href="#" class="btn btn--outline btn--block" style="display:none; margin-top:16px;">Download as PDF</a>
+    <a id="pdf-link" href="#" class="btn btn--outline btn--block" style="display:none; margin-top:16px;" data-cy="pdf-download">Download as PDF</a>
   </form>
 </main>
 

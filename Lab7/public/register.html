@@ -34,17 +34,17 @@
     <h1>Module registration</h1>
     <p class="sub">Registration only proceeds once tuition, drug testing, and the registration window are all clear.</p>
 
-    <div class="alert alert--error" id="form-alert"></div>
-    <div class="alert alert--success" id="form-success"></div>
+    <div class="alert alert--error" id="form-alert" data-cy="error"></div>
+    <div class="alert alert--success" id="form-success" data-cy="success"></div>
 
     <div class="field">
       <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8">
+      <input type="text" id="studentId" name="studentId" placeholder="02230123" maxlength="8" data-cy="student-id">
     </div>
 
     <div class="field">
       <label for="moduleCode">Module</label>
-      <select id="moduleCode" name="moduleCode">
+      <select id="moduleCode" name="moduleCode" data-cy="module-select">
         <option value="MAT205(SWE)">MAT205(SWE) — MAT205(SWE) Repeater</option>
         <option value="SWE302">SWE302 — Software Testing &amp; Quality Assurance</option>
         <option value="SWE303">SWE303 — Software Project Management</option>
@@ -53,7 +53,7 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn--gold btn--block btn--lg">Register Module</button>
+    <button type="submit" class="btn btn--gold btn--block btn--lg" data-cy="register-btn">Register Module</button>
 
     <p class="form-foot">Not paid yet? <a href="payment.html">Upload your tuition payment first</a>.</p>
   </form>

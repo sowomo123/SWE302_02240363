@@ -1,0 +1,29 @@
+{
+  "validStudent": {
+    "studentId": "02230123",
+    "password": "Passw0rd1",
+    "name": "Pema Choden"
+  },
+  "invalidStudent": {
+    "studentId": "02230124",
+    "password": "Passw0rd1"
+  },
+  "invalidPassword": {
+    "studentId": "02230123",
+    "password": "wrongpass"
+  },
+  "payment": {
+    "studentId": "02230123",
+    "transactionNumber": "123-123456789",
+    "screenshot": "payment.jpg"
+  },
+  "invalidTransaction": {
+    "studentId": "02230123",
+    "transactionNumber": "invalid",
+    "screenshot": "payment.jpg"
+  },
+  "registration": {
+    "studentId": "02230123",
+    "moduleCode": "SWE302"
+  }
+}
